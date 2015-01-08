@@ -24,19 +24,19 @@ page.open(address, function (status) {
     phantom.exit(1);
   }
 
-  clipRect = page.evaluate(function (s) {
-    var elem = document.querySelector(s);
-    return elem ? elem.getBoundingClientRect() : {};
-  }, selector);
-
-  if (Object.keys(clipRect).length === 0) {
-    console.log('error -- cannot select: ' + selector);
-    phantom.exit(1);
-  }
-
-  page.clipRect = clipRect;
-
   window.setTimeout(function () {
+    clipRect = page.evaluate(function (s) {
+      var elem = document.querySelector(s);
+      return elem ? elem.getBoundingClientRect() : {};
+    }, selector);
+
+    if (Object.keys(clipRect).length === 0) {
+      console.log('error -- cannot select: ' + selector);
+      phantom.exit(1);
+    }
+
+    page.clipRect = clipRect;
+
     page.render(outFn);
     phantom.exit(0);
   }, timeOut);
