@@ -24,6 +24,8 @@ page.open(address, function (status) {
     phantom.exit(1);
   }
 
+  page.viewportSize = { width: 1920, height: 1080 };
+
   window.setTimeout(function () {
     clipRect = page.evaluate(function (s) {
       var elem = document.querySelector(s);
